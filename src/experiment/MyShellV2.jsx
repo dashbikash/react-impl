@@ -3,16 +3,15 @@ import {
     AppShell,
     Navbar,
     Header,
-    Footer,
-    Aside,
     Text,
     MediaQuery,
     Burger,
-    Autocomplete,
-    useMantineTheme, NavLink, createStyles, Container, Group, rem, Menu, Button
+    useMantineTheme, NavLink, createStyles, Group, rem, Menu
 } from '@mantine/core';
 
-import { IconGauge, IconFingerprint, IconActivity, IconDashboard, IconBrandReact, IconSearch, IconExternalLink, IconUser, IconUserCircle } from '@tabler/icons-react';
+import { FaUserCircle, FaSearch, FaPlusCircle, FaDungeon } from 'react-icons/fa';
+import { MdDashboard, MdAnalytics, MdLogout, MdManageAccounts, MdCategory, MdFilterAlt } from "react-icons/md";
+
 
 const useStyles = createStyles((theme) => ({
     header: {
@@ -77,6 +76,9 @@ const useStyles = createStyles((theme) => ({
             display: 'none',
         },
     },
+    navLink: {
+        borderRadius: 5
+    }
 }));
 
 export default function MyShellV2() {
@@ -91,13 +93,21 @@ export default function MyShellV2() {
             navbar={
                 <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
                     <NavLink
-                        label="Active filled"
-                        icon={<IconDashboard size="1rem" stroke={1.5} />}
-                        variant="filled"
+                        label="Create"
+                        icon={<FaPlusCircle size="1rem" stroke={1.5} />}
+                        variant="light"
+                        className={classes.navLink}
+                        active
+                    />
+                    <NavLink
+                        label="Dashboard"
+                        icon={<MdDashboard size="1rem" stroke={1.5} />}
+                        variant="light"
+                        className={classes.navLink}
                     />
                     <NavLink
                         label="First parent link"
-                        icon={<IconGauge size="1rem" stroke={1.5} />}
+                        icon={<MdCategory size="1rem" stroke={1.5} />}
                         childrenOffset={28}
                     >
                         <NavLink label="First child link" />
@@ -111,7 +121,7 @@ export default function MyShellV2() {
 
                     <NavLink
                         label="Second parent link"
-                        icon={<IconFingerprint size="1rem" stroke={1.5} />}
+                        icon={<MdFilterAlt size="1rem" stroke={1.5} />}
                         childrenOffset={28}
                         defaultOpened
                     >
@@ -124,50 +134,52 @@ export default function MyShellV2() {
             }
             header={
                 <Header height={56} className={classes.header} mb={120}>
-                    <Container>
-                        <div className={classes.inner}>
-                            <Group>
-                                <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-                                    <Burger
-                                        opened={opened}
-                                        onClick={() => setOpened((status) => !status)}
-                                        size="sm"
-                                        color='white'
-                                        mr="xl"
-                                    />
-                                </MediaQuery>
-                                <IconBrandReact size={28} /> <Text style={{ marginLeft: 5 }}>Brand</Text>
-                            </Group>
 
-                            <Group ml={50} spacing={5}>
+                    <div className={classes.inner}>
+                        <Group>
+                            <MediaQuery styles={{ display: 'none' }}>
+                                <Burger
+                                    opened={opened}
+                                    onClick={() => setOpened((status) => !status)}
+                                    size="sm"
+                                    color='white'
+                                    mr="xl"
+                                />
+                            </MediaQuery>
+                            <MdAnalytics size={28} color='yellow' /><Text style={{ fontWeight: 'bold' ,fontSize:22 }} >Vidura</Text>
+                        </Group>
+
+                        <Group ml={50} spacing={5}>
                             <a className={classes.link} href='#' onClick={(event) => {
-                                            event.preventDefault();
-                                        }}><IconSearch /></a>
-                                <Menu width={200} shadow="md">
-                                    <Menu.Target>
-                                        <a className={classes.link} href='#' onClick={(event) => {
-                                            event.preventDefault();
-                                        }}><IconUserCircle /></a>
-                                    </Menu.Target>
+                                event.preventDefault();
+                            }} style={{ fontSize: 18 }}><FaSearch /></a>
+                            <Menu width={200} shadow="md">
+                                <Menu.Target>
+                                    <a className={classes.link} href='#' onClick={(event) => {
+                                        event.preventDefault();
+                                    }} style={{ fontSize: 18 }}><FaUserCircle /></a>
+                                </Menu.Target>
 
-                                    <Menu.Dropdown>
-                                        <Menu.Item component="a" href="https://mantine.dev">
-                                            Mantine website
-                                        </Menu.Item>
+                                <Menu.Dropdown>
+                                    <Menu.Item
+                                        icon={<MdManageAccounts size={rem(14)} />}
+                                        component="a"
+                                        href="https://mantine.dev"
+                                    >
+                                        Manage
+                                    </Menu.Item>
 
-                                        <Menu.Item
-                                            icon={<IconExternalLink size={rem(14)} />}
-                                            component="a"
-                                            href="https://mantine.dev"
-                                            target="_blank"
-                                        >
-                                            External link
-                                        </Menu.Item>
-                                    </Menu.Dropdown>
-                                </Menu>
-                            </Group>
-                        </div>
-                    </Container>
+                                    <Menu.Item
+                                        icon={<MdLogout size={rem(14)} />}
+                                        component="a"
+                                        href="https://mantine.dev"
+                                    >
+                                        Sign out
+                                    </Menu.Item>
+                                </Menu.Dropdown>
+                            </Menu>
+                        </Group>
+                    </div>
 
                 </Header>
             }

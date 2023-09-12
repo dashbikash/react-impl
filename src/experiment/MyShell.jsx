@@ -1,24 +1,26 @@
-import { useState } from 'react';
 import {
     AppShell,
-    Navbar,
-    Header,
-    Footer,
-    Aside,
-    Text,
-    MediaQuery,
     Burger,
-    useMantineTheme, NavLink, createStyles, Container
+    Header,
+    MediaQuery,
+    NavLink,
+    Navbar,
+    Text,
+    createStyles,
+    useMantineTheme
 } from '@mantine/core';
+import { useState } from 'react';
 
-import { IconGauge, IconFingerprint, IconActivity, IconDashboard, IconBrandReact } from '@tabler/icons-react';
+
+import { FaPlusCircle } from 'react-icons/fa';
+import { MdAnalytics, MdCategory, MdDashboard, MdFilterAlt } from "react-icons/md";
 
 const useStyles = createStyles((theme) => ({
     header: {
         backgroundColor: theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
         borderBottom: 0,
         color: 'white',
-        boxShadow:'unset'
+        boxShadow: 'unset'
     }
 }));
 
@@ -34,13 +36,21 @@ export default function MyShell() {
             navbar={
                 <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
                     <NavLink
-                        label="Active filled"
-                        icon={<IconDashboard size="1rem" stroke={1.5} />}
-                        variant="filled"
+                        label="Create"
+                        icon={<FaPlusCircle size="1rem" stroke={1.5} />}
+                        variant="light"
+                        className={classes.navLink}
+                        active
+                    />
+                    <NavLink
+                        label="Dashboard"
+                        icon={<MdDashboard size="1rem" stroke={1.5} />}
+                        variant="light"
+                        className={classes.navLink}
                     />
                     <NavLink
                         label="First parent link"
-                        icon={<IconGauge size="1rem" stroke={1.5} />}
+                        icon={<MdCategory size="1rem" stroke={1.5} />}
                         childrenOffset={28}
                     >
                         <NavLink label="First child link" />
@@ -48,13 +58,13 @@ export default function MyShell() {
                         <NavLink label="Nested parent link" childrenOffset={28}>
                             <NavLink label="First child link" />
                             <NavLink label="Second child link" />
-                            <NavLink label="Third child link" />
+                            <NavLink label="Third child link" active />
                         </NavLink>
                     </NavLink>
 
                     <NavLink
                         label="Second parent link"
-                        icon={<IconFingerprint size="1rem" stroke={1.5} />}
+                        icon={<MdFilterAlt size="1rem" stroke={1.5} />}
                         childrenOffset={28}
                         defaultOpened
                     >
@@ -77,8 +87,8 @@ export default function MyShell() {
                                 mr="xl"
                             />
                         </MediaQuery>
-                        
-                        <IconBrandReact/> <Text style={{marginLeft:5}}>Brand</Text>
+
+                        <MdAnalytics /> <Text style={{ marginLeft: 5 }}>Brand</Text>
 
                     </div>
                 </Header>

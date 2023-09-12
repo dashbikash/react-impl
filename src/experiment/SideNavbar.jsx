@@ -1,4 +1,4 @@
-import { Badge, Box, NavLink, Navbar } from '@mantine/core';
+import { Badge, NavLink, Navbar } from '@mantine/core';
 import { IconHome2, IconGauge, IconChevronRight, IconActivity, IconCircleOff } from '@tabler/icons-react';
 
 export function SideNavbar() {
